@@ -9,9 +9,7 @@ let canvasPosition = canvas.getBoundingClientRect();
 
 function createImage(imageSrc) {
   const image = new Image();
-
   image.src = imageSrc;
-
   return image;
 }
 
@@ -25,22 +23,22 @@ class Explosion {
     this.height = this.spritesHeight * 0.7;
     this.x = x;
     this.y = y;
+    this.sound = new Audio();
+    this.sound.src = "../sounds/fire-impact-1.mp3";
     this.frame = 0;
     this.image = boom;
     this.timer = 0;
     this.angle = Math.random() * 6.2;
-    this.sound = new Audio();
-    this.sound.src = "../sounds/fire-impact-1.wav";
+ 
   }
   update() {
- 
+    if (this.frame === 0) {
+      this.sound.play()
+     }
     this.timer++;
     if (this.timer % 10 === 0) {
       this.frame++;
     }
-    if (this.frame === 0) {
-      this.sound.play()
-     }
   }
   draw() {
     ctx.save();
